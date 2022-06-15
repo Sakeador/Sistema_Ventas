@@ -57,16 +57,15 @@ if($_SESSION["perfil"] == "Especial"){
          <tr>
            
            <th style="width:10px">#</th>
-           <th>Nombre</th>
+           <th>Nombres</th>
+           <th>Apellidos</th>
            <th>Documento ID</th>
            <th>Email</th>
            <th>Teléfono</th>
-           <th>Dirección</th>
-           <th>Fecha nacimiento</th> 
-           <th>Total compras</th>
-           <th>Última compra</th>
-           <th>Ingreso al sistema</th>
-           <th>Acciones</th>
+           <th>Celular</th>
+           <th>Domicilio</th>
+           <th>Evento</th> 
+           <th>Foto</th>
 
          </tr> 
 
@@ -88,33 +87,31 @@ if($_SESSION["perfil"] == "Especial"){
 
                     <td>'.($key+1).'</td>
 
-                    <td>'.$value["nombre"].'</td>
+                    <td>'.$value["cl_nombre"].'</td>
 
-                    <td>'.$value["documento"].'</td>
+                    <td>'.$value["cl_apellido"].'</td>
 
-                    <td>'.$value["email"].'</td>
+                    <td>'.$value["cl_dni"].'</td>
 
-                    <td>'.$value["telefono"].'</td>
+                    <td>'.$value["cl_email"].'</td>
 
-                    <td>'.$value["direccion"].'</td>
+                    <td>'.$value["cl_telefono"].'</td>
 
-                    <td>'.$value["fecha_nacimiento"].'</td>             
+                    <td>'.$value["cl_celular"].'</td>
 
-                    <td>'.$value["compras"].'</td>
+                    <td>'.$value["cl_domicilio"].'</td>
 
-                    <td>'.$value["ultima_compra"].'</td>
-
-                    <td>'.$value["fecha"].'</td>
+                    <td>'.$value["cl_evento"].'</td>
 
                     <td>
 
                       <div class="btn-group">
                           
-                        <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+                        <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente"',/*idCliente*/'idCliente="'.$value["cl_id"].'"><i class="fa fa-pencil"></i></button>';
 
-                      if($_SESSION["perfil"] == "Administrador"){
+                      if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Operario"){
 
-                          echo '<button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                          echo '<button class="btn btn-danger btnEliminarCliente" ',/*idCliente*/'idCliente="'.$value["cl_id"].'"><i class="fa fa-times"></i></button>';
 
                       }
 
@@ -180,7 +177,21 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" name="nuevoCliente" id="nuevoCliente"  placeholder="Ingresar nombre" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL APELLIDO -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nuevoApellido" id="nuevoApellido"  placeholder="Ingresar apellidos" required>
 
               </div>
 
@@ -194,7 +205,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="number" min="0" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar documento" required>
+                <input type="number" min="0" class="form-control input-lg" name="nuevoDocumentoId" id="nuevoDocumentoId" placeholder="Ingresar documento" required>
 
               </div>
 
@@ -208,7 +219,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
-                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email" required>
+                <input type="email" class="form-control input-lg" name="nuevoEmail" id="nuevoEmail" placeholder="Ingresar email" required>
 
               </div>
 
@@ -222,7 +233,21 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                <input type="text" class="form-control input-lg" name="nuevoTelefono"  id="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(99)99-99-99'" data-mask required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL CELULAR -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nuevoCelular"  id="nuevoCelular" placeholder="Ingresar Celular" data-inputmask="'mask':'999-999-999'" data-mask required>
 
               </div>
 
@@ -236,13 +261,13 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección" required>
+                <input type="text" class="form-control input-lg" name="nuevoDireccion" id="nuevoDireccion" placeholder="Ingresar dirección" required>
 
               </div>
 
             </div>
 
-             <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
+             <!-- ENTRADA PARA LA EVENTO -->
             
             <div class="form-group">
               
@@ -250,7 +275,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                <input type="text" class="form-control input-lg" name="nuevoEvento" id="nuevoEvento" placeholder="Ingresar el Evento" required>
 
               </div>
 
@@ -333,6 +358,20 @@ MODAL EDITAR CLIENTE
 
             </div>
 
+            <!-- ENTRADA PARA EL APELLIDO -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="editarApellido" id="editarApellido" required>
+                
+              </div>
+
+            </div>
+
             <!-- ENTRADA PARA EL DOCUMENTO ID -->
             
             <div class="form-group">
@@ -369,7 +408,21 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" data-inputmask="'mask':'(99) 99-99-99'" data-mask required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL CELULAR -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="editarCelular" id="editarCelular" data-inputmask="'mask':'999-999-999'" data-mask required>
 
               </div>
 
@@ -389,7 +442,7 @@ MODAL EDITAR CLIENTE
 
             </div>
 
-             <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
+             <!-- ENTRADA PARA LA FECHA DE EVENTO -->
             
             <div class="form-group">
               
@@ -397,7 +450,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarFechaNacimiento" id="editarFechaNacimiento"  data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                <input type="text" class="form-control input-lg" name="editarEvento" id="editarEvento"  required>
 
               </div>
 

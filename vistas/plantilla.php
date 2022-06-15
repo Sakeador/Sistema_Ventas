@@ -145,6 +145,21 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "crear-venta" ||
          $_GET["ruta"] == "editar-venta" ||
          $_GET["ruta"] == "reportes" ||
+         /*===================================*/ 
+         $_GET["ruta"] == "perfil" ||
+         $_GET["ruta"] == "usuarios" ||
+         $_GET["ruta"] == "cat-paquete" ||
+         $_GET["ruta"] == "cat-evento" ||
+         $_GET["ruta"] == "cat-lugar" ||
+         $_GET["ruta"] == "cat-servicios-adicionales" ||
+         $_GET["ruta"] == "contratos" ||
+         $_GET["ruta"] == "invitados" ||
+         $_GET["ruta"] == "eventos" ||
+         $_GET["ruta"] == "deposito" ||
+         $_GET["ruta"] == "pagos" ||
+         $_GET["ruta"] == "citas" ||
+         $_GET["ruta"] == "soporte" ||
+         $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "salir"){
 
         include "modulos/".$_GET["ruta"].".php";

@@ -10,20 +10,25 @@ class ControladorClientes{
 
 		if(isset($_POST["nuevoCliente"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoCliente"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["nuevoDocumentoId"]) &&
-			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"]) && 
-			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"]) && 
-			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["nuevaDireccion"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoCliente"]) ||
+			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["nuevoApellido"]) ||
+			   preg_match('/^[0-9]+$/', $_POST["nuevoDocumentoId"]) ||
+			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"]) || 
+			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"]) || 
+			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoCelular"]) || 
+			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["nuevoDireccion"]) ||
+			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["nuevoEvento"])){
 
-			   	$tabla = "clientes";
+			   	$tabla = "tbl_cliente";
 
-			   	$datos = array("nombre"=>$_POST["nuevoCliente"],
-					           "documento"=>$_POST["nuevoDocumentoId"],
-					           "email"=>$_POST["nuevoEmail"],
-					           "telefono"=>$_POST["nuevoTelefono"],
-					           "direccion"=>$_POST["nuevaDireccion"],
-					           "fecha_nacimiento"=>$_POST["nuevaFechaNacimiento"]);
+			   	$datos = array("cl_nombre"=>$_POST["nuevoCliente"],
+			   				   "cl_apellido"=>$_POST["nuevoApellido"],
+					           "cl_dni"=>$_POST["nuevoDocumentoId"],
+					           "cl_email"=>$_POST["nuevoEmail"],
+					           "cl_telefono"=>$_POST["nuevoTelefono"],
+					           "cl_celular"=>$_POST["nuevoCelular"],
+					           "cl_domicilio"=>$_POST["nuevoDireccion"],
+							   "cl_evento"=>$_POST["nuevoEvento"]);
 
 			   	$respuesta = ModeloClientes::mdlIngresarCliente($tabla, $datos);
 
@@ -81,7 +86,7 @@ class ControladorClientes{
 
 	static public function ctrMostrarClientes($item, $valor){
 
-		$tabla = "clientes";
+		$tabla = "tbl_cliente";
 
 		$respuesta = ModeloClientes::mdlMostrarClientes($tabla, $item, $valor);
 
@@ -97,21 +102,26 @@ class ControladorClientes{
 
 		if(isset($_POST["editarCliente"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCliente"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["editarDocumentoId"]) &&
-			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["editarEmail"]) && 
-			   preg_match('/^[()\-0-9 ]+$/', $_POST["editarTelefono"]) && 
-			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarDireccion"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCliente"]) ||
+			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarApellido"]) ||
+			   preg_match('/^[0-9]+$/', $_POST["editarDocumentoId"]) ||
+			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["editarEmail"]) ||
+			   preg_match('/^[()\-0-9 ]+$/', $_POST["editarTelefono"]) || 
+			   preg_match('/^[()\-0-9 ]+$/', $_POST["editarCelular"]) || 
+			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarDireccion"]) ||
+			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarEvento"])){
 
-			   	$tabla = "clientes";
+			   	$tabla = "tbl_cliente";
 
-			   	$datos = array("id"=>$_POST["idCliente"],
-			   				   "nombre"=>$_POST["editarCliente"],
-					           "documento"=>$_POST["editarDocumentoId"],
-					           "email"=>$_POST["editarEmail"],
-					           "telefono"=>$_POST["editarTelefono"],
-					           "direccion"=>$_POST["editarDireccion"],
-					           "fecha_nacimiento"=>$_POST["editarFechaNacimiento"]);
+			   	$datos = array("cl_id"=>$_POST["idCliente"],
+			   				   "cl_nombre"=>$_POST["editarCliente"],
+			   				   "cl_apellido"=>$_POST["editarApellido"],
+					           "cl_dni"=>$_POST["editarDocumentoId"],
+					           "cl_email"=>$_POST["editarEmail"],
+					           "cl_telefono"=>$_POST["editarTelefono"],
+					           "cl_celular"=>$_POST["editarCelular"],
+					           "cl_domicilio"=>$_POST["editarDireccion"],
+					           "cl_evento"=>$_POST["editarEvento"]);
 
 			   	$respuesta = ModeloClientes::mdlEditarCliente($tabla, $datos);
 
@@ -171,7 +181,7 @@ class ControladorClientes{
 
 		if(isset($_GET["idCliente"])){
 
-			$tabla ="clientes";
+			$tabla ="tbl_cliente";
 			$datos = $_GET["idCliente"];
 
 			$respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);

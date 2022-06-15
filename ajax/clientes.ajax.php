@@ -13,7 +13,7 @@ class AjaxClientes{
 
 	public function ajaxEditarCliente(){
 
-		$item = "id";
+		$item = "cl_id";
 		$valor = $this->idCliente;
 
 		$respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);

@@ -3,8 +3,9 @@ EDITAR CLIENTE
 =============================================*/
 $(".tablas").on("click", ".btnEditarCliente", function(){
 
+  /*idCliente*//*idCliente*/
 	var idCliente = $(this).attr("idCliente");
-
+/*idCliente*//*idCliente*/
 	var datos = new FormData();
     datos.append("idCliente", idCliente);
 
@@ -19,13 +20,15 @@ $(".tablas").on("click", ".btnEditarCliente", function(){
       dataType:"json",
       success:function(respuesta){
       
-      	   $("#idCliente").val(respuesta["id"]);
-	       $("#editarCliente").val(respuesta["nombre"]);
-	       $("#editarDocumentoId").val(respuesta["documento"]);
-	       $("#editarEmail").val(respuesta["email"]);
-	       $("#editarTelefono").val(respuesta["telefono"]);
-	       $("#editarDireccion").val(respuesta["direccion"]);
-           $("#editarFechaNacimiento").val(respuesta["fecha_nacimiento"]);
+      	   $("#idCliente").val(respuesta["cl_id"]);
+	       $("#editarCliente").val(respuesta["cl_nombre"]);
+	       $("#editarApellido").val(respuesta["cl_apellido"]);
+	       $("#editarDocumentoId").val(respuesta["cl_dni"]);
+	       $("#editarEmail").val(respuesta["cl_email"]);
+	       $("#editarTelefono").val(respuesta["cl_telefono"]);
+	       $("#editarCelular").val(respuesta["cl_celular"]);
+	       $("#editarDireccion").val(respuesta["cl_domicilio"]);
+           $("#editarEvento").val(respuesta["cl_evento"]);
 	  }
 
   	})
@@ -36,7 +39,7 @@ $(".tablas").on("click", ".btnEditarCliente", function(){
 ELIMINAR CLIENTE
 =============================================*/
 $(".tablas").on("click", ".btnEliminarCliente", function(){
-
+/*idCliente*//*idCliente*/
 	var idCliente = $(this).attr("idCliente");
 	
 	swal({
@@ -50,7 +53,7 @@ $(".tablas").on("click", ".btnEliminarCliente", function(){
         confirmButtonText: 'Si, borrar cliente!'
       }).then(function(result){
         if (result.value) {
-          
+                                                      /*idCliente*//*idCliente*/
             window.location = "index.php?ruta=clientes&idCliente="+idCliente;
         }
 
